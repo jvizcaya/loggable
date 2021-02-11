@@ -5,7 +5,7 @@
 Loggable saves a record in the **logs** table each time a user performs an operation on each model that uses the **Trait** on the **created**, **updated** and **deleted** events.
 
 
-## Instalation
+## InstalLation
 
 ```
 composer require jvizcaya/loggable
