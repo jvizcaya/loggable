@@ -53,11 +53,13 @@ trait Loggable
 					}
 				});
 
-				static::restored(function ($model){
-					if(config('loggable.log_events.restored')){
-						self::save_log($model, 'restore');
-					}
-				});
+				if(method_exists($model, 'restored')){
+					static::restored(function ($model){
+						if(config('loggable.log_events.restored')){
+							self::save_log($model, 'restore');
+						}
+					});
+				}
 		}
 
 		/**

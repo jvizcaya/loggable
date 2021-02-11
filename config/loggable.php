@@ -22,7 +22,7 @@ return [
     */
     'log_events' =>[
         'created' => true,
-        'saved' => true,
+        'saved' => false,
         'updated' => true,
         'deleted' => true,
         'retrieved' => false,
