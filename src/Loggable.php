@@ -16,12 +16,12 @@ use Illuminate\Support\Facades\DB;
 trait Loggable
 {
 		/**
-		* The "booted" method of the model.
+		* The "boot" method of the model.
 		*
 		* @param  object $this->model	model object
 		* @return void
 		*/
-		protected static function booted()
+		protected static function bootLoggable()
 		{
 				static::created(function ($model) {
 					if(config('loggable.log_events.created')){
