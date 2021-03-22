@@ -3,7 +3,7 @@
 namespace Jvizcaya\Loggable\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
+use Jvizcaya\Loggable\Models\Log;
 
 class LoggableDelete extends Command
 {
@@ -50,9 +50,9 @@ class LoggableDelete extends Command
 
           $this->days = is_numeric($this->argument('days')) ? $this->argument('days') : config('loggable.logs_time');
 
-          DB::table(config('loggable.table'))->where('log_at', '<=', now()->subDay($this->days)->toDateTimeString())->delete();
+          Log::where('log_at', '<=', now()->subDays($this->days))->delete();
 
-          $this->info('The users activities logs has been deleted.');
+          $this->info('Users activities logs has been deleted.');
 
     }
 

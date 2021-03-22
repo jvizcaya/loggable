@@ -86,7 +86,7 @@ trait Loggable
 					Log::create([
 						'user_id' => auth()->user()->id,
 						'model_id' => $model->id,
-						'model_type' => self::class,
+						'model_type' => get_class($model),
 						'type' => $type,
 						'table' => $model->getTable(),
 						'log_at' => now()->toDateTimeString()
