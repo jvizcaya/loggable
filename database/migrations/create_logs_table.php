@@ -16,13 +16,16 @@ class CreateLogsTable extends Migration
           Schema::create(config('loggable.table'), function (Blueprint $table) {
             $table->bigInteger('id')->autoIncrement();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references(app()->make(config('auth.providers.users.model'))->getKeyName())
-                    ->on(app()->make(config('auth.providers.users.model'))->getTable());
-            $table->unsignedBigInteger('register_id');
+            $table->morphs('model');
             $table->string('type');
-            $table->string('model');
             $table->string('table');
             $table->dateTime('log_at');
+
+            // index colums
+            $table->foreign('user_id')
+                  ->references(app()->make(config('auth.providers.users.model'))->getKeyName())
+                  ->on(app()->make(config('auth.providers.users.model'))->getTable());
+
           });
     }
 

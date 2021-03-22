@@ -42,8 +42,24 @@ class Post extends Model
 
 That's all, in the previous example a record will be made in the **logs** table every time a user saves, updates or deletes in the **Post** model table.
 
-## Logs delete (console command)  
+## Retrieve models logs
 
+This package was built in using the Laravel [one-to-many polymorphic relationship](https://laravel.com/docs/8.x/eloquent-relationships#one-to-many-polymorphic-relations) convention and the trait `Jvizcaya\Loggable\Loggable` has the model relationship definition.
+
+Load post logs
+```php
+use App\Models\Post;
+
+$logs = Post::find(1)->logs;
+```
+
+Load posts with logs
+```php
+use App\Models\Post;
+
+$posts = Post::with('logs')->get();
+```
+## Logs delete (console command)  
 
 To delete the activity log data, we can use the available console command **loggable:delete**, this command will delete the logs that are older than the days defined in the loggable.php configuration file (30 days by default).
 
@@ -60,6 +76,10 @@ php artisan loggable:delete 5
 Add the console command **loggable:delete** to [Task scheduling](https://laravel.com/docs/8.x/scheduling) for run the command automatically.  
 
 ---
+
+## Note
+
+This package use the model file `Jvizcaya\Loggable\Models\Log`.
 
 ## License
 

@@ -30,10 +30,13 @@ class LoggableServiceProvider extends ServiceProvider
             // Load loggable config file
             $this->publishes([
                 __DIR__.'/../config/loggable.php' => config_path('loggable.php'),
-            ]);
+            ], 'config');
 
-            // Load loggable table migrations
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            // Load migration file
+            $this->publishes([
+              __DIR__.'/../database/migrations/create_logs_table.php' =>
+                database_path('migrations').'/'.now()->format('Y_m_d').'_000000_create_logs_table.php'
+            ], 'migrations');
 
             // Load loggable commands
             if ($this->app->runningInConsole()) {
