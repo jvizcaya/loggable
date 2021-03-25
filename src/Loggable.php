@@ -75,6 +75,24 @@ trait Loggable
     }
 
 		/**
+     * (scope) Load the model logs.
+     *
+     * @param integer $limit maximum number of results
+     * @param boolean $loadUser if user data must be loaded
+     * @param string $userColumns $userColumns user columns to load
+     */
+		public function scopeLastLogs($query, $limit = 10, $loadUser = true, $userColumns = 'id,name')
+		{
+					return $query->with(['logs' => function ($q) use ($limit, $loadUser, $userColumns){
+									  $q->orderBy('log_at', 'desc')->take($limit);
+
+										if($loadUser){
+											$q->with('user:'.$userColumns);
+										}
+								}]);
+		}
+
+		/**
 		* The "save log" method.
 		*
 		* @param  object $this->model	model object

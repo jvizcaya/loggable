@@ -46,19 +46,37 @@ That's all, in the previous example a record will be made in the **logs** table 
 
 This package was built in using the Laravel [one-to-many polymorphic relationship](https://laravel.com/docs/8.x/eloquent-relationships#one-to-many-polymorphic-relations) convention and the trait `Jvizcaya\Loggable\Loggable` has the model relationship definition.
 
-Load post logs
+**Load post logs**
 ```php
 use App\Models\Post;
 
 $logs = Post::find(1)->logs;
 ```
 
-Load posts with logs
+**Lazy Eager Loading**
 ```php
 use App\Models\Post;
 
 $posts = Post::with('logs')->get();
 ```
+
+**Scope lastLogs($limit = 10, $loadUser = true, $userColumns = 'id,name')**
+
+Optionally we can use the scope **lastLogs** to load the model last logs. This function accepts as the first parameter the maximum number of results.
+
+```php
+Post::lastLogs(10)->get();
+```
+By default this function loads the user data associated with each log.
+If we want to select the columns of the user table, we can pass a string with the names of the columns separated by a comma(,) as the third parameter.
+```php
+Post::lastLogs(10, true, 'id,name,email,status')->get();
+```  
+To disable the loading of user data, pass a boolean false as the second parameter.
+```php
+Post::lastLogs(20, false)->get();
+```  
+
 ## Logs delete (console command)  
 
 To delete the activity log data, we can use the available console command **loggable:delete**, this command will delete the logs that are older than the days defined in the loggable.php configuration file (30 days by default).
