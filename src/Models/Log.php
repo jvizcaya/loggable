@@ -55,11 +55,21 @@ class Log extends Model
      */
      public $timestamps = false;
 
+
      /**
-      * Get the parent loggable model.
+     * Get the user that owns the logs.
+     *
+     */
+      public function user()
+      {
+          return $this->belongsTo(config('auth.providers.users.model'));
+      }
+
+     /**
+      * Get the parent model.
       *
       */
-     public function loggable()
+     public function model()
      {
          return $this->morphTo();
      }
