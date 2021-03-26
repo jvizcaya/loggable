@@ -79,7 +79,7 @@ Post::lastLogs(20, false)->get();
 
 ## Logs delete (console command)  
 
-To delete the activity log data, we can use the available console command **loggable:delete**, this command will delete the logs that are older than the days defined in the loggable.php configuration file (30 days by default).
+To delete the activity log data, we can use the available console command **loggable:delete**, this command will delete the logs that are older than the days defined in the loggable.php configuration file (90 days by default).
 
 ```
 php artisan loggable:delete
