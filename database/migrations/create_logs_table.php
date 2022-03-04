@@ -19,6 +19,7 @@ class CreateLogsTable extends Migration
             $table->morphs('model');
             $table->string('type');
             $table->string('table');
+            $table->longText('payload')->nullable();
             $table->dateTime('log_at');
 
             // index colums

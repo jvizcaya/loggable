@@ -107,6 +107,14 @@ trait Loggable
 						'model_type' => get_class($model),
 						'type' => $type,
 						'table' => $model->getTable(),
+						'payload' => [
+							'user' => [
+								'id' => auth()->user()->id,
+								'name' => auth()->user()->name,
+								'email' => auth()->user()->email
+							],
+							'data' => config('loggable.log_data') && $type == 'delete' ? $model->toArray() : null
+						],
 						'log_at' => now()->toDateTimeString()
 					]);
 		}
