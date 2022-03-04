@@ -31,6 +31,7 @@ class Log extends Model
         'model_id',
         'type',
         'table',
+        'payload',
         'log_at'
     ];
 
