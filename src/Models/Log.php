@@ -45,6 +45,7 @@ class Log extends Model
        'model_id' => 'integer',
        'type' => 'string',
        'table' => 'string',
+       'payload' => 'array',
        'log_at' => 'datetime'
      ];
 
