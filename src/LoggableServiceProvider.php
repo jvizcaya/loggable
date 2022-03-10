@@ -38,6 +38,16 @@ class LoggableServiceProvider extends ServiceProvider
                 database_path('migrations').'/'.now()->format('Y_m_d').'_000000_create_logs_table.php'
             ], 'migrations');
 
+            $this->publishes([
+              __DIR__.'/../public' => public_path('vendor/loggable'),
+            ], 'public');
+
+            // Load loggable dashboard route
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+
+            // Load loggable views
+            $this->loadViewsFrom(__DIR__.'/../resources/views', 'Loggable');
+
             // Load loggable commands
             if ($this->app->runningInConsole()) {
                 $this->commands([

@@ -47,7 +47,7 @@ class Log extends Model
        'type' => 'string',
        'table' => 'string',
        'payload' => 'array',
-       'log_at' => 'datetime'
+       'log_at' => 'datetime:Y-m-d H:i:s'
      ];
 
      /**
@@ -76,4 +76,55 @@ class Log extends Model
          return $this->morphTo();
      }
 
+     /**
+     * Scope a query to only include user.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeByUser($query, $value)
+    {
+        if($value){
+          return $query->where('user_id', $value);
+        }
+    }
+
+    /**
+    * Scope a query to only include table.
+    *
+    * @param  \Illuminate\Database\Eloquent\Builder  $query
+    * @return \Illuminate\Database\Eloquent\Builder
+    */
+     public function scopeByTable($query, $value)
+     {
+         if($value){
+           return $query->where('table', $value);
+         }
+     }
+
+     /**
+     * Scope a query to only include table.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+      public function scopeByModel($query, $value)
+      {
+          if($value){
+            return $query->where('model_id', $value);
+          }
+      }
+
+      /**
+      * Scope a query to only include a date.
+      *
+      * @param  \Illuminate\Database\Eloquent\Builder  $query
+      * @return \Illuminate\Database\Eloquent\Builder
+      */
+       public function scopeDate($query, $value)
+       {
+           if($value){
+             return $query->whereDate('log_at', '=', now()->parse($value)->format('Y-m-d'));
+           }
+       }
 }
