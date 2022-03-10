@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="base-url" content="{{ url(config('loggable.route_path')) }}">
-    <link href="{{ mix('vendor/loggable/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/loggable/app.css') }}" rel="stylesheet">
     <title>Loggable - Dashboard</title>
   </head>
   <body>
@@ -116,6 +116,6 @@
       </div>
       <vue-progress-bar></vue-progress-bar>
     </div>
-    <script src="{{ mix('vendor/loggable/app.js') }}"></script>
+    <script src="{{ asset('vendor/loggable/app.js') }}"></script>
   </body>
 </html>
