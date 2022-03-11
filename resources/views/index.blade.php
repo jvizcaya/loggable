@@ -9,6 +9,7 @@
   </head>
   <body>
     <div id="app">
+      <modal :show="showModal" @close="showModal=false" :content="modalContent"></modal>
       <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Loggable Dashboard</a>
@@ -93,7 +94,7 @@
                 <td>@{{ log.model_type }} (@{{ log.table }})</td>
                 <td>@{{ log.model_id }}</td>
                 <td>@{{ log.log_at }}</td>
-                <td>
+                <td @click.prevent="showData(log.payload.data,log.type)">
                   <span class="badge p-2" :class="{'bg-success': log.type == 'create', 'bg-info': log.type == 'update', 'bg-danger': log.type == 'delete' }" >
                     @{{ log.type }}
                   </span>
