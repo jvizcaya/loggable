@@ -26,12 +26,19 @@ class LoggableController extends Controller
     */
     public function logs(Request $request)
     {
-        return Log::byUser($request->user)
+        $logs =  Log::byUser($request->user)
                     ->byTable($request->table)
                     ->byModel($request->model)
                     ->date($request->date)
                     ->orderBy('log_at', 'desc')
                     ->paginate(10);
+
+        $logs->each(function ($log) {
+            $log->append('log_at_string');
+        });
+
+        return $logs;
+
     }
 
     /**

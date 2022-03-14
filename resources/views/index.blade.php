@@ -93,7 +93,9 @@
                 <td>@{{ log.payload.user.name }} (@{{ log.payload.user.email }})</td>
                 <td>@{{ log.model_type }} (@{{ log.table }})</td>
                 <td>@{{ log.model_id }}</td>
-                <td>@{{ log.log_at }}</td>
+                <td :title=log.log_at>
+                  @{{ log.log_at_string }}
+                </td>
                 <td @click.prevent="showData(log.payload.data,log.type)">
                   <span class="badge p-2" :class="{'bg-success': log.type == 'create', 'bg-info': log.type == 'update', 'bg-danger': log.type == 'delete' }" >
                     @{{ log.type }}
