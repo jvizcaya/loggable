@@ -135,7 +135,7 @@ class Log extends Model
       public function getLogAtStringAttribute()
       {
           if($this->log_at->diffInDays(now()) < 7){
-            return $this->log_at->diffForHumans(now());
+            return $this->log_at->locale('en')->diffForHumans(now());
           }
 
           return $this->log_at->format('Y-m-d H:i:s');
