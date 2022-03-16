@@ -96,7 +96,7 @@
                 <td :title=log.log_at>
                   @{{ log.log_at_string }}
                 </td>
-                <td @click.prevent="showData(log.payload.data,log.type)">
+                <td @click.prevent="showData(log.payload.data)">
                   <span class="badge p-2" :class="{'bg-success': log.type == 'create', 'bg-info': log.type == 'update', 'bg-danger': log.type == 'delete' }" >
                     @{{ log.type }}
                   </span>

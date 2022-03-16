@@ -113,10 +113,35 @@ trait Loggable
 								'name' => auth()->user()->name,
 								'email' => auth()->user()->email
 							],
-							'data' => config('loggable.log_data') && $type == 'delete' ? $model->toArray() : null
+							'data' => self::getPayloadData($model, $type)
 						],
 						'log_at' => now()->toDateTimeString()
 					]);
+		}
+
+		/**
+		* Get the payload data.
+		*
+		* @param  object $this->model	model object
+		* @param string $type the model type operation
+		* @return array|null
+		*/
+		static function getPayloadData($model, $type){
+
+				if(config('loggable.log_data'))
+				{
+						if($type = 'save' || $type == 'update'){
+							return $model->getDirty();
+						}
+
+						if($type == 'delete'){
+							return $model->toArray();
+						}
+
+						return null;
+				}
+
+				return null;
 		}
 
 
