@@ -82,7 +82,7 @@ By default, model data will be saved to the payload object's data attribute on *
 
 ## Logs delete (console command)  
 
-To delete the activity log data, we can use the available console command **loggable:delete**, this command will delete the logs that are older than the days defined in the loggable.php configuration file (60 days by default).
+To delete the activity log data, we can use the available console command **loggable:delete**, this command will delete the logs that are older than the days defined in the loggable.php configuration file (30 days by default).
 
 ```
 php artisan loggable:delete

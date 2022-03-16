@@ -48,5 +48,5 @@ return [
     | The time in days that the log records are out of the delete process
     |--------------------------------------------------------------------------
     */
-   'logs_time' => env('LOGGABLE_LOG_TIME', 60),
+   'logs_time' => env('LOGGABLE_LOG_TIME', 30)
 ];
