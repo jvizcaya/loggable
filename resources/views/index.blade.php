@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="base-url" content="{{ url(config('loggable.route_path')) }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('vendor/loggable/favicon.png') }}">
     <link href="{{ asset('vendor/loggable/app.css') }}" rel="stylesheet">
     <title>Loggable - Dashboard</title>
   </head>
