@@ -3,6 +3,8 @@
 namespace Jvizcaya\Loggable;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate;
 use Jvizcaya\Loggable\Console\Commands\LoggableDelete;
 
 class LoggableServiceProvider extends ServiceProvider
@@ -38,12 +40,18 @@ class LoggableServiceProvider extends ServiceProvider
                 database_path('migrations').'/'.now()->format('Y_m_d').'_000000_create_logs_table.php'
             ], 'migrations');
 
+            // Load loggable assets
             $this->publishes([
               __DIR__.'/../public' => public_path('vendor/loggable'),
             ], 'public');
 
             // Load loggable dashboard route
-            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            Route::group([
+              'namespace' => 'Jvizcaya\Loggable\Controllers',
+              'middleware' => config('loggable.middleware', 'web'),
+            ], function () {
+              $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+            });
 
             // Load loggable views
             $this->loadViewsFrom(__DIR__.'/../resources/views', 'Loggable');
@@ -54,5 +62,11 @@ class LoggableServiceProvider extends ServiceProvider
                   LoggableDelete::class
                 ]);
             }
+
+            // Define dashboard authorization gate
+            Gate::define('viewLoggableDashboard', function ($user = null) {
+                return $this->app->environment('local') ||
+                       config('loggable.enable_dashboard');
+            });
       }
 }
